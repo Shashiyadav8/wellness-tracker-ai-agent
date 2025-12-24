@@ -4,7 +4,19 @@ import ProgressBar from '../ui/ProgressBar';
 
 const SummaryCard = ({ title, value, unit, icon: Icon, color, max, progressValue, subtext }) => {
     return (
-        <Card style={{ position: 'relative', overflow: 'hidden' }}>
+        <Card className="summary-card" style={{ position: 'relative', overflow: 'hidden' }}>
+            <style>{`
+                @media (max-width: 480px) {
+                    .summary-card {
+                        max-width: 72%;
+                    }
+                }
+                @media (max-width: 400px) {
+                    .summary-card {
+                        max-width: 62%;
+                    }
+                }
+            `}</style>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 'var(--spacing-md)' }}>
                 <h3 style={{ fontSize: '1rem', fontWeight: 500, color: 'var(--text-secondary)' }}>{title}</h3>
                 {Icon && <Icon size={20} color={color} />}

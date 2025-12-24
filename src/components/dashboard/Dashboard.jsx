@@ -28,7 +28,7 @@ const Dashboard = () => {
             <style>{`
         .dashboard-grid {
           display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+          grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
           gap: var(--spacing-lg);
           padding-bottom: var(--spacing-xl);
         }
@@ -39,6 +39,16 @@ const Dashboard = () => {
         @media (max-width: 600px) {
           .dashboard-grid {
             grid-template-columns: 1fr;
+          }
+        }
+        .quick-actions-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+          gap: var(--spacing-lg);
+        }
+        @media (max-width: 768px) {
+          .quick-actions-grid {
+             grid-template-columns: 1fr;
           }
         }
       `}</style>
@@ -109,7 +119,7 @@ const Dashboard = () => {
             {/* Trackers Section */}
             <div style={{ gridColumn: '1 / -1', marginTop: 'var(--spacing-lg)' }}>
                 <h3 style={{ marginBottom: 'var(--spacing-md)', fontSize: '1.25rem', color: 'var(--text-secondary)' }}>Quick Actions</h3>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 'var(--spacing-lg)' }}>
+                <div className="quick-actions-grid">
                     <WaterTracker />
                     <ActivityTracker />
                 </div>

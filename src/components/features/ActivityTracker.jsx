@@ -18,6 +18,18 @@ const ActivityTracker = () => {
 
     return (
         <Card className="activity-tracker">
+            <style>{`
+                @media (max-width: 480px) {
+                    .activity-tracker {
+                        max-width: 72%;
+                    }
+                }
+                @media (max-width: 400px) {
+                    .activity-tracker {
+                        max-width: 62%;
+                    }
+                }
+            `}</style>
             <h3 style={{ fontSize: '1.25rem', fontWeight: 600, color: 'var(--text-primary)', marginBottom: 'var(--spacing-md)' }}>Daily Activity</h3>
 
             <div style={{ marginBottom: 'var(--spacing-lg)' }}>
@@ -25,13 +37,14 @@ const ActivityTracker = () => {
                     <Footprints size={16} style={{ display: 'inline', verticalAlign: 'text-bottom', marginRight: '5px' }} />
                     Steps Count
                 </label>
-                <div style={{ display: 'flex', gap: '8px' }}>
+                <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
                     <input
                         type="number"
                         value={stepsInput}
                         onChange={(e) => setStepsInput(e.target.value)}
                         style={{
-                            flex: 1,
+                            flex: '1 1 120px',
+                            minWidth: '0',
                             padding: '10px',
                             borderRadius: 'var(--radius-md)',
                             background: 'var(--bg-secondary)',
@@ -47,7 +60,8 @@ const ActivityTracker = () => {
                             borderRadius: 'var(--radius-md)',
                             background: 'var(--accent-green)',
                             color: 'white',
-                            cursor: 'pointer'
+                            cursor: 'pointer',
+                            flex: '0 0 auto'
                         }}
                     >
                         <Save size={18} />
@@ -60,13 +74,14 @@ const ActivityTracker = () => {
                     <Moon size={16} style={{ display: 'inline', verticalAlign: 'text-bottom', marginRight: '5px' }} />
                     Sleep Duration (Hours)
                 </label>
-                <div style={{ display: 'flex', gap: '8px' }}>
+                <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
                     <input
                         type="number"
                         value={sleepInput}
                         onChange={(e) => setSleepInput(e.target.value)}
                         style={{
-                            flex: 1,
+                            flex: '1 1 120px',
+                            minWidth: '0',
                             padding: '10px',
                             borderRadius: 'var(--radius-md)',
                             background: 'var(--bg-secondary)',
@@ -82,7 +97,8 @@ const ActivityTracker = () => {
                             borderRadius: 'var(--radius-md)',
                             background: 'var(--accent-purple)',
                             color: 'white',
-                            cursor: 'pointer'
+                            cursor: 'pointer',
+                            flex: '0 0 auto'
                         }}
                     >
                         <Save size={18} />

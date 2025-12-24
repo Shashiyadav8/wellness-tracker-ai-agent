@@ -47,7 +47,9 @@ JSON format:
   "calories": number,
   "protein": number,
   "fats": number,
-  "carbs": number
+  "carbs": number,
+  "sugar": number,
+  "fiber": number
 }
 
 User input: ${prompt || "Analyze the image"}

@@ -37,7 +37,29 @@ const Recommendations = () => {
                 ))}
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: 'var(--spacing-sm)' }}>
+            <div className="recommendations-grid">
+                <style>{`
+                .recommendations-grid {
+                    display: grid;
+                    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+                    gap: var(--spacing-sm);
+                }
+                @media (max-width: 600px) {
+                    .recommendations-grid {
+                        grid-template-columns: 1fr;
+                    }
+                }
+                @media (max-width: 480px) {
+                    .recommendations-card {
+                        max-width: 72%;
+                    }
+                }
+                @media (max-width: 400px) {
+                    .recommendations-card {
+                        max-width: 62%;
+                    }
+                }
+            `}</style>
                 {currentFoods.length > 0 ? (
                     currentFoods.map((food, index) => (
                         <div

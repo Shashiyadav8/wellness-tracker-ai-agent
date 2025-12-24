@@ -44,7 +44,25 @@ const AIAnalysisInput = ({ onAnalysisComplete }) => {
     // Replaced early return with inline warning
 
     return (
-        <Card className="ai-input-card" style={{ borderColor: 'var(--accent-purple)', background: 'rgba(168, 85, 247, 0.05)' }}>
+        <Card className="ai-input-card">
+            <style>{`
+                .ai-input-card {
+                    border-color: var(--accent-purple);
+                    background: rgba(168, 85, 247, 0.05);
+                    max-width: 100%;
+                    overflow: hidden;
+                }
+                @media (max-width: 480px) {
+                    .ai-input-card {
+                        max-width: 72%;
+                    }
+                }
+                @media (max-width: 400px) {
+                    .ai-input-card {
+                        max-width: 62%;
+                    }
+                }
+            `}</style>
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: 'var(--spacing-md)' }}>
                 <Sparkles color="var(--accent-purple)" />
                 <h3 style={{ fontSize: '1.2rem', fontWeight: 600 }}>AI Food Scanner</h3>
@@ -73,15 +91,8 @@ const AIAnalysisInput = ({ onAnalysisComplete }) => {
                             style={{ display: 'none' }}
                         />
                         <label
+                            className="upload-label"
                             htmlFor="food-image-upload"
-                            style={{
-                                display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '12px',
-                                padding: '30px', borderRadius: 'var(--radius-lg)',
-                                background: 'rgba(255,255,255,0.08)', color: 'var(--text-primary)',
-                                cursor: 'pointer', border: '2px dashed var(--accent-purple)',
-                                transition: 'all 0.2s',
-                                textAlign: 'center'
-                            }}
                         >
                             <div style={{ padding: '15px', background: 'var(--accent-purple)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                                 <ImageIcon size={32} color="white" />
@@ -91,6 +102,28 @@ const AIAnalysisInput = ({ onAnalysisComplete }) => {
                                 <div style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>Take a photo or upload</div>
                             </div>
                         </label>
+                        <style>{`
+                            .upload-label {
+                                display: flex;
+                                flex-direction: column;
+                                align-items: center;
+                                justify-content: center;
+                                gap: 12px;
+                                padding: 30px;
+                                border-radius: var(--radius-lg);
+                                background: rgba(255,255,255,0.08);
+                                color: var(--text-primary);
+                                cursor: pointer;
+                                border: 2px dashed var(--accent-purple);
+                                transition: all 0.2s;
+                                text-align: center;
+                            }
+                            @media (max-width: 600px) {
+                                .upload-label {
+                                    padding: 20px;
+                                }
+                            }
+                        `}</style>
                     </div>
                 ) : (
                     <div style={{ position: 'relative', borderRadius: 'var(--radius-md)', overflow: 'hidden', border: '1px solid var(--border-color)' }}>

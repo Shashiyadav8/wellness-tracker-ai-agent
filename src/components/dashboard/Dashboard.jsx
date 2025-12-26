@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Monitor, Droplet, Footprints, Moon, Flame } from 'lucide-react';
+import { Monitor, Droplet, Footprints, Moon, Flame, Dumbbell, Wheat, Anchor } from 'lucide-react';
 import SummaryCard from './SummaryCard';
 import { useWellness } from '../../hooks/useWellnessData';
 import { healthTips } from '../../data/foodData';
@@ -8,6 +8,13 @@ import WaterTracker from '../features/WaterTracker';
 import ActivityTracker from '../features/ActivityTracker';
 import NutritionTracker from '../features/NutritionTracker';
 import Recommendations from '../features/Recommendations';
+
+const DAILY_GOALS = {
+    calories: 2000,
+    protein: 60,
+    carbs: 250,
+    iron: 18
+};
 
 const Dashboard = () => {
     const { data, getProgress } = useWellness();
@@ -21,7 +28,14 @@ const Dashboard = () => {
     const calProgress = getProgress('calories');
     const waterProgress = getProgress('water');
     const stepsProgress = getProgress('steps');
-    const sleepProgress = getProgress('sleep');
+
+    // Calculate Macros from Food Log
+    const todaysTotals = (data.foodLog || []).reduce((acc, item) => ({
+        // calories: acc.calories + (Number(item.calories) || 0), // Already tracked by calProgress
+        protein: acc.protein + (Number(item.protein) || 0),
+        carbs: acc.carbs + (Number(item.carbs) || 0),
+        iron: acc.iron + (Number(item.iron) || 0)
+    }), { protein: 0, carbs: 0, iron: 0 });
 
     return (
         <div className="dashboard-grid">
@@ -67,14 +81,45 @@ const Dashboard = () => {
                 <NutritionTracker />
             </div>
 
+            {/* Nutrition & Wellness Cards */}
             <SummaryCard
                 title="Calories"
                 value={calProgress.value}
                 unit="kcal"
                 max={calProgress.goal}
                 icon={Flame}
-                color="var(--text-primary)" // White/Orange for flame?
+                color="#f97316" // Orange
                 subtext={`${calProgress.goal - calProgress.value} kcal remaining`}
+            />
+
+            <SummaryCard
+                title="Protein"
+                value={todaysTotals.protein}
+                unit="g"
+                max={DAILY_GOALS.protein}
+                icon={Dumbbell}
+                color="#22c55e" // Green
+                subtext={`${Math.max(0, DAILY_GOALS.protein - todaysTotals.protein)}g to goal`}
+            />
+
+            <SummaryCard
+                title="Carbs"
+                value={todaysTotals.carbs}
+                unit="g"
+                max={DAILY_GOALS.carbs}
+                icon={Wheat}
+                color="#eab308" // Yellow
+                subtext={`${Math.max(0, DAILY_GOALS.carbs - todaysTotals.carbs)}g to goal`}
+            />
+
+            <SummaryCard
+                title="Iron"
+                value={todaysTotals.iron}
+                unit="mg"
+                max={DAILY_GOALS.iron}
+                icon={Anchor} // Anchor as symbol for heavy/iron/strength
+                color="#ec4899" // Pink
+                subtext={`${Math.max(0, DAILY_GOALS.iron - todaysTotals.iron)}mg to goal`}
             />
 
             <SummaryCard
@@ -99,9 +144,9 @@ const Dashboard = () => {
 
             <SummaryCard
                 title="Sleep"
-                value={stepsProgress.sleep || data.sleep} // Fix variable
+                value={stepsProgress.sleep || data.sleep}
                 unit="hrs"
-                max={stepsProgress.goal || 8} // Sleep goal usually 8
+                max={8}
                 icon={Moon}
                 color="var(--accent-purple)"
                 subtext={data.sleep >= 7 ? "Great rest!" : "Aim for 8 hours"}

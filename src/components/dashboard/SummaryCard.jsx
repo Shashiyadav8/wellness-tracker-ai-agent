@@ -2,7 +2,7 @@ import React from 'react';
 import Card from '../ui/Card';
 import ProgressBar from '../ui/ProgressBar';
 
-const SummaryCard = ({ title, value, unit, icon: Icon, color, max, progressValue, subtext }) => {
+const SummaryCard = ({ title, value, unit, icon: Icon, color, max, progressValue, subtext, children }) => {
     return (
         <Card className="summary-card" style={{ position: 'relative', overflow: 'hidden' }}>
             <style>{`
@@ -36,6 +36,7 @@ const SummaryCard = ({ title, value, unit, icon: Icon, color, max, progressValue
                     {subtext}
                 </p>
             )}
+            {children}
         </Card>
     );
 };

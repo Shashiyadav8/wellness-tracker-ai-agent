@@ -33,7 +33,7 @@ const AIAnalysisInput = ({ onAnalysisComplete }) => {
 
         const result = await analyzeFood(foodPrompt, selectedImage);
         if (result) {
-            onAnalysisComplete(result);
+            onAnalysisComplete(result, !!selectedImage);
             setFoodPrompt('');
             handleClearImage();
         }
